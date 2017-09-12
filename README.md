@@ -15,7 +15,7 @@
 
 6) Distinguish between left and right lane lines by calculating the sign of each line segment's slope.
 
-7) Compute the average negative slope and its average bias and the positive slope and its bias of the lines
+7) Compute the average negative slope and its average bias and the positive slope and its bias of the lines.
 
 8) Set y1 at the bottom of the image and y2 at a reasonable level. y1 and y2 are the same for both lines. Using the mean slopes and biases, derive x1 and x2 for both left and right lane lines. Draw both line segments on a blank image.
 
