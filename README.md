@@ -22,7 +22,7 @@
 9) Blend the original image with the red-line image.
 
 
-## Issues
+## Good News
 For the easier videos, solidWhiteRight.mp4 and solidYellowLeft.mp4, it doesn't do a bad job.
 <figure>
  <img src="examples/yellow_eg_good" width="380" alt="Combined Image" />
@@ -44,6 +44,19 @@ For the easier videos, solidWhiteRight.mp4 and solidYellowLeft.mp4, it doesn't d
  
 There are one or two single frame mess-ups, as above, that don't veer off the road or into the wrong lane but could slow the car's progress, but they instantly fix themselves. Overall, it works pretty well, so I tested it on the challenge video. However, the current pipeline has several issues:
 
+<figure>
+ <img src="examples/lines_frame_98" width="380" alt="Combined Image" />
+  <img src="examples/lines_frame_139" width="380" alt="Combined Image" />
+ <img src="examples/lines_frame_159" width="380" alt="Combined Image" />
+ <figcaption>
+ <p></p> 
+ <p style="text-align: center;">In general, long spaces between dotted lines, different road colors, and shadows can be problematic for edge and line detection.</p> 
+ </figcaption>
+</figure>
+ <p></p> 
+
+
+## Issues and How to Solve Them
 1) Challenge video has a different image shape, so needed a new image mask and new y-values for the endpoints in the draw_lines function.
 
 2) The white dotted lines on the right often have large spaces, making it difficult for the hough_lines function to detect the lines.
@@ -53,17 +66,6 @@ There are one or two single frame mess-ups, as above, that don't veer off the ro
 4) The solid yellow line on the left also sometimes blends in due to brightness and changing road color.
 
 5) The solid yellow line is always long, but if the min_line_len is too short, Hough lines function will detect irrelevant lines, which can be caused by factors like tree shadows.
-
-<figure>
- <img src="examples/lines_frame_98" width="380" alt="Combined Image" />
-  <img src="examples/lines_frame_139" width="380" alt="Combined Image" />
- <img src="examples/lines_frame_159" width="380" alt="Combined Image" />
- <figcaption>
- <p></p> 
- <p style="text-align: center;">Long spaces between dotted lines, different road colors, and shadows can be problematic for edge and line detection.</p> 
- </figcaption>
-</figure>
- <p></p> 
 
 To fix everything I created two image masks, one to highlight the left lane and the other the right. I did this to control the threshold, min_line_len, and max_gap_len in the hough_lines function, allowing me to fine-tune the hyperparameters separately.
 
@@ -93,4 +95,3 @@ Adding these extra steps got the job done, at least with respect to the challeng
 
 
 **Run the notebook or watch test_videos_output/challenge.mp4 to see the results!**
-
